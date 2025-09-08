@@ -1,12 +1,20 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import { createPinia } from 'pinia';
-import './styles/main.css';
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import App from './App.vue'
+import '@/styles/main.css'
 
-const app = createApp(App);
+// Performance monitoring setup
+import { usePerformanceMonitor } from '@/composables/usePerformanceMonitor'
 
-app.use(router);
-app.use(createPinia());
+const app = createApp(App)
+const pinia = createPinia()
 
-app.mount('#app');
+app.use(pinia)
+
+// Initialize performance monitoring in development
+if (import.meta.env.DEV) {
+  const { initializeMonitoring } = usePerformanceMonitor()
+  initializeMonitoring()
+}
+
+app.mount('#app')

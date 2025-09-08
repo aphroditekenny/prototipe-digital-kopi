@@ -1,8 +1,61 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import './styles/main.css';
-
-createApp(App)
-  .use(router)
-  .mount('#app');
+{
+  "name": "kopikala-web-platform",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "test:e2e": "playwright test",
+    "test:visual": "percy exec -- playwright test",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "type-check": "vue-tsc --noEmit",
+    "optimize:assets": "node scripts/asset-optimization/optimize-models.js",
+    "optimize:textures": "node scripts/asset-optimization/compress-textures.js",
+    "generate:lods": "node scripts/asset-optimization/generate-lods.js",
+    "performance:audit": "node scripts/performance/lighthouse-audit.js",
+    "performance:analyze": "node scripts/performance/bundle-analyzer.js",
+    "prebuild": "node scripts/build/prebuild-checks.js",
+    "postbuild": "node scripts/build/postbuild-optimization.js"
+  },
+  "dependencies": {
+    "vue": "^3.5.21",
+    "@tresjs/core": "^4.2.0",
+    "@tresjs/cientos": "^4.1.0",
+    "pinia": "^2.2.4",
+    "gsap": "^3.12.5",
+    "three": "^0.168.0",
+    "@types/three": "^0.168.0",
+    "axios": "^1.7.7",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.4",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@playwright/test": "^1.47.2",
+    "@percy/cli": "^1.29.3",
+    "@percy/playwright": "^1.0.7",
+    "@gltf-transform/core": "^4.0.8",
+    "@gltf-transform/extensions": "^4.0.8",
+    "@gltf-transform/functions": "^4.0.8",
+    "sharp": "^0.33.5",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.10.0",
+    "eslint-plugin-vue": "^9.28.0",
+    "lighthouse": "^12.2.0",
+    "postcss": "^8.4.47",
+    "stats.js": "^0.17.0",
+    "tailwindcss": "^3.4.12",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.7",
+    "vite-bundle-analyzer": "^0.11.0",
+    "vitest": "^2.1.1",
+    "vue-tsc": "^2.1.6",
+    "webpack-bundle-analyzer": "^4.10.2"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

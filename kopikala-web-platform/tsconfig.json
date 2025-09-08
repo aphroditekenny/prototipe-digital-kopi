@@ -1,8 +1,53 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import './styles/main.css';
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "allowJs": true,
 
-createApp(App)
-  .use(router)
-  .mount('#app');
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    
+    /* Path mapping */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@composables/*": ["./src/composables/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@types/*": ["./src/types/*"],
+      "@assets/*": ["./src/assets/*"]
+    },
+    
+    /* Types */
+    "types": ["vite/client", "node", "@types/three", "@types/ws"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts", 
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "scripts/**/*.js",
+    "tests/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

@@ -1,11 +1,292 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import { createPinia } from 'pinia';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-const app = createApp(App);
-const pinia = createPinia();
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-app.use(pinia);
-app.use(router);
-app.mount('#app');
+/* Base styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* WebGL Canvas specific styles */
+  canvas {
+    @apply block outline-none;
+    touch-action: manipulation;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+
+  /* Selection styles */
+  ::selection {
+    @apply bg-coffee-200 text-coffee-900;
+  }
+
+  ::-moz-selection {
+    @apply bg-coffee-200 text-coffee-900;
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Loading animations */
+  .loading-spinner {
+    @apply inline-block w-4 h-4 border-2 border-current border-r-transparent rounded-full animate-spin;
+  }
+
+  .loading-spinner-lg {
+    @apply inline-block w-8 h-8 border-4 border-current border-r-transparent rounded-full animate-spin;
+  }
+
+  /* Performance indicator styles */
+  .performance-indicator {
+    @apply fixed top-4 left-4 z-90 font-mono text-xs;
+  }
+
+  .performance-good {
+    @apply text-green-600 bg-green-50 border border-green-200;
+  }
+
+  .performance-warning {
+    @apply text-yellow-600 bg-yellow-50 border border-yellow-200;
+  }
+
+  .performance-critical {
+    @apply text-red-600 bg-red-50 border border-red-200;
+  }
+
+  /* UI Panel styles */
+  .ui-panel {
+    @apply glass rounded-2xl p-6 shadow-medium backdrop-blur-xl;
+  }
+
+  .ui-panel-dark {
+    @apply glass-dark rounded-2xl p-6 shadow-medium backdrop-blur-xl;
+  }
+
+  /* Interactive elements */
+  .interactive-element {
+    @apply cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95;
+  }
+
+  .interactive-element:hover {
+    @apply shadow-medium;
+  }
+
+  /* Color picker styles */
+  .color-swatch {
+    @apply w-8 h-8 rounded-full border-2 border-white shadow-medium cursor-pointer transition-transform duration-200;
+  }
+
+  .color-swatch:hover {
+    @apply scale-110;
+  }
+
+  .color-swatch.active {
+    @apply ring-2 ring-coffee-500 ring-offset-2;
+  }
+
+  /* Product card styles */
+  .product-card {
+    @apply card-hover p-4 cursor-pointer;
+  }
+
+  .product-card:hover {
+    @apply transform -translate-y-1;
+  }
+
+  .product-card.selected {
+    @apply ring-2 ring-coffee-500 shadow-strong;
+  }
+
+  /* Navigation styles */
+  .nav-item {
+    @apply relative px-4 py-2 text-gray-600 hover:text-coffee-600 transition-colors duration-200;
+  }
+
+  .nav-item.active {
+    @apply text-coffee-600 font-medium;
+  }
+
+  .nav-item.active::after {
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-coffee-500 rounded-full;
+    content: '';
+  }
+
+  /* Form styles */
+  .form-input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-coffee-500 focus:border-transparent transition-all duration-200;
+  }
+
+  .form-input:focus {
+    @apply outline-none;
+  }
+
+  /* Mobile-specific styles */
+  @media (max-width: 768px) {
+    .ui-panel {
+      @apply p-4 rounded-xl;
+    }
+
+    .mobile-touch-target {
+      @apply min-h-12 min-w-12;
+    }
+  }
+
+  /* 3D Scene specific styles */
+  .scene-container {
+    @apply relative w-full h-full overflow-hidden;
+  }
+
+  .scene-overlay {
+    @apply absolute inset-0 pointer-events-none;
+  }
+
+  .scene-ui {
+    @apply pointer-events-auto;
+  }
+
+  /* Responsive 3D canvas */
+  .responsive-canvas {
+    @apply w-full h-full;
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (max-width: 768px) {
+    .responsive-canvas {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .responsive-canvas {
+      aspect-ratio: 1 / 1;
+    }
+  }
+}
+
+/* Utility styles */
+@layer utilities {
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .prevent-scroll {
+    @apply overflow-hidden touch-none;
+  }
+
+  /* 3D Transform utilities */
+  .rotate-x-45 {
+    transform: rotateX(45deg);
+  }
+
+  .rotate-y-45 {
+    transform: rotateY(45deg);
+  }
+
+  .rotate-z-45 {
+    transform: rotateZ(45deg);
+  }
+
+  /* Aspect ratio utilities for responsive design */
+  .aspect-3d {
+    aspect-ratio: 16 / 9;
+  }
+
+  .aspect-3d-mobile {
+    aspect-ratio: 4 / 3;
+  }
+
+  .aspect-3d-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Touch-friendly sizing */
+  .touch-target {
+    @apply min-h-11 min-w-11;
+  }
+
+  .touch-target-lg {
+    @apply min-h-12 min-w-12;
+  }
+
+  /* Safe area adjustments for mobile devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Animation utilities */
+  .animation-paused {
+    animation-play-state: paused;
+  }
+
+  .animation-running {
+    animation-play-state: running;
+  }
+
+  /* High-performance transforms */
+  .translate3d-0 {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* WebGL and Canvas specific optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .respect-motion-preference {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    @apply hidden;
+  }
+  
+  body {
+    @apply bg-white text-black;
+  }
+}
